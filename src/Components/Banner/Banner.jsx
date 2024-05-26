@@ -21,11 +21,14 @@ function Banner() {
             <span>For Rent: House & Apart...</span>
           </div>
         </div>
-        <div className="banner">
-          <img
-            src="../../../Images/banner copy.png"
-            alt=""
-          />
+        <div className="banner relative w-full">
+          <div className="w-full max-w-[1200px] mx-auto">
+            <img
+              src="../../../Images/banner copy.png"
+              alt=""
+              className='w-full md:w-1/2 lg:w-1/3 xl:w-1/4 2xl:w-1/5 object-cover'
+            />
+          </div>
         </div>
       </div>
       

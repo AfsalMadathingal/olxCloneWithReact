@@ -1,43 +1,77 @@
-import React from 'react';
+import React from "react";
 
-import './Header.css';
-import OlxLogo from '../../assets/OlxLogo';
-import Search from '../../assets/Search';
-import Arrow from '../../assets/Arrow';
-import SellButton from '../../assets/SellButton';
-import SellButtonPlus from '../../assets/SellButtonPlus';
+import "./Header.css";
+import OlxLogo from "../../assets/OlxLogo";
+import Search from "../../assets/Search";
+import Arrow from "../../assets/Arrow";
+import SellButton from "../../assets/SellButton";
+import SellButtonPlus from "../../assets/SellButtonPlus";
+import { useFirebase } from "../../store/FirebaseContext";
+import { useNavigate } from "react-router-dom";
 function Header() {
+  const { displayName, logout } = useFirebase();
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
-    <div className="headerParentDiv">
+    <div className="py-2 bg-slate-100">
       <div className="headerChildDiv">
-        <div className="brandName">
+        <div className=" mx-5 brandName">
           <OlxLogo></OlxLogo>
         </div>
-        <div className="placeSearch">
-          <Search></Search>
-          <input type="text" />
-          <Arrow></Arrow>
-        </div>
-        <div className="productSearch">
-          <div className="input">
-            <input
-              type="text"
-              placeholder="Find car,mobile phone and more..."
-            />
+        <div className="place-and-search flex items-center gap-2">
+          <div className="placeSearch ">
+            <Search></Search>
+            <input type="text" placeholder="Search Place or Area" />
+            <Arrow></Arrow>
           </div>
-          <div className="searchAction">
+          <div className="productSearch">
+            <div className="input">
+              <input
+                type="text"
+                className="focus:ring-2 focus:ring-[#50c7d4] focus:outline-none "
+                placeholder="Find car,mobile phone and more..."
+              />
+            </div>
+          </div>
+          <div className="searchAction bg-[#002f34] p-3 rounded cursor-pointer hover:bg-[#32939e]">
             <Search color="#ffffff"></Search>
           </div>
         </div>
+        <div className="left-items flex gap-10 justify-center align-middle ">
         <div className="language">
           <span> ENGLISH </span>
           <Arrow></Arrow>
         </div>
-        <div className="loginPage">
-          <span>Login</span>
+        
+          {displayName ? (
+            <p className="align-middle">{`Welcome ${displayName}`}</p>
+          ) : (
+            <p
+              onClick={() => {
+                navigate("/login");
+              }}
+            >
+              Login
+            </p>
+          )}
           <hr />
-        </div>
-
+ 
+        {displayName && (
+          <span
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            {" "}
+            Logout{" "}
+          </span>
+        )}
         <div className="sellMenu">
           <SellButton></SellButton>
           <div className="sellMenuContent">
@@ -45,6 +79,8 @@ function Header() {
             <span>SELL</span>
           </div>
         </div>
+        </div>
+        
       </div>
     </div>
   );

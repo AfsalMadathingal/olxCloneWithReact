@@ -1,6 +1,4 @@
-.bannerParentDiv {
-  padding-top: 4em;
-}
+
 .bannerParentDiv .bannerChildDiv {
 }
 .bannerParentDiv .bannerChildDiv .menuBar {
@@ -24,7 +22,6 @@
 
 .bannerChildDiv .banner {
   position: relative;
-  width: 100vw;
 }
 .bannerChildDiv .banner img{
   width: 100vw;

@@ -1,38 +1,69 @@
-import React from 'react';
-
-import Logo from '../../olx-logo.png';
+import React, { useState } from 'react';
+import Logo from '../../assets/olx-logo.png';
 import './Login.css';
+import { useFirebase } from '../../store/FirebaseContext';
+import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
+
 
 function Login() {
+
+  const {login } =useFirebase()
+  const [email,setEmail]= useState()
+  const [password,setPassword]= useState()
+  const navigate = useNavigate()
+
+  const handleSubmit = (e)=>{
+
+    e.preventDefault()
+    
+    login(email,password).then(()=>{
+
+      navigate('/')
+
+    }).catch((error)=>{
+      toast.error(error.code.split('/')[1].split('-').join(" "))
+      console.log(error);
+    })
+
+  }
+
   return (
     <div>
-      <div className="loginParentDiv">
+      <div className="loginParentDiv w-96 p-6 shadow-md">
+        <div className='flex justify-center'>
         <img width="200px" height="200px" src={Logo}></img>
-        <form>
-          <label htmlFor="fname">Email</label>
+        </div>
+        
+        <form onSubmit={handleSubmit}>
+          <label className='font-semibold'  htmlFor="Email">Email</label>
           <br />
           <input
-            className="input"
+            onChange={(e)=>{setEmail(e.target.value)}}
+            className="focus:ring-2  focus:ring-[#002f34] focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+
             type="email"
-            id="fname"
+            id="email"
             name="email"
-            defaultValue="John"
+            defaultValue="John@example.com"
           />
           <br />
-          <label htmlFor="lname">Password</label>
+          <label className='font-semibold' htmlFor="password">Password</label>
           <br />
           <input
-            className="input"
+            onChange={(e)=>{setPassword(e.target.value)}}
+            className="focus:ring-2  focus:ring-[#002f34] focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
+
             type="password"
-            id="lname"
+            id="password"
             name="password"
-            defaultValue="Doe"
+            defaultValue=""
           />
           <br />
           <br />
           <button>Login</button>
         </form>
-        <a>Signup</a>
+        <a className='py-2 px-0 cursor-pointer font-semibold' onClick={()=>{navigate('/signup')}}>Signup</a>
       </div>
     </div>
   );

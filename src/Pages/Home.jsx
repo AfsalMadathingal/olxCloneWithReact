@@ -1,12 +1,24 @@
-import React from 'react';
-
+import React, { useEffect } from 'react';
 import Header from '../Components/Header/Header';
 import Banner from '../Components/Banner/Banner';
-
 import Posts from '../Components/Posts/Posts';
 import Footer from '../Components/Footer/Footer';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useFirebase } from '../store/FirebaseContext';
 
 function Home(props) {
+
+const {setDisplayName , auth } = useFirebase()
+
+  useEffect(()=>{
+
+    onAuthStateChanged(auth,async (user)=>{
+      setDisplayName(user.displayName)
+    })
+
+
+  },[])
+
   return (
     <div className="homeParentDiv">
       <Header />
