@@ -16,10 +16,10 @@ import { useFirebase } from "./store/FirebaseContext";
 import Create from "./Pages/Create";
 import View from "./Pages/ViewPost";
 import Post from "./store/PostContext";
+import "rsuite/dist/rsuite.min.css";
 
 function App() {
   const { setDisplayName, auth } = useFirebase();
-
 
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="text-black">
         <Post>
           <ToastContainer theme="dark" />
           <Routes>

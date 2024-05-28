@@ -32,7 +32,7 @@ function Posts() {
   }
 
   return (
-    <div className="postParentDiv  ">
+    <div className="postParentDiv bg-slate-100 ">
       <p className="py-2 font-semibold mx-8">Recommendations</p>
       <div className="recommendations flex flex-wrap justify-center">
         {isLoading ? (
@@ -42,16 +42,17 @@ function Posts() {
             <div
               onClick={()=>{handleView(product)}}
               key={product.id}
-              className="card rounded lg:w-2/12  sm:w-3/8 m-8  shadow border-black border hover:shadow-xl h-d flex flex-col"
+              className="cursor-pointer bg-white rounded lg:w-2/12  sm:w-3/8 m-8  shadow border-black border hover:shadow-xl h-d flex flex-col"
             >
               <div className=" p-2 mx-2 my-2 flex justify-end bg-white rounded-3xl absolute z-100">
                 <Heart />
               </div>
-              <div className="image">
+              <div className=" h-28 py-2 px-2">
                 <img
                   src={product.downloadURL}
                   alt=""
-                  className="w-full h-auto object-cover rounded-lg"
+                  
+                  className="w-full h-24 object-cover rounded-lg"
                 />
               </div>
               <div className="content p-3 flex flex-col flex-grow">

@@ -1,14 +1,12 @@
 import React from 'react';
 
-import './Footer.css';
-
 function Footer() {
   return (
-    <div className="footerParentDiv">
-      <div className="content">
+    <div className="bg-slate-200  ">
+      <div className="flex justify-between sm:py-1 sm:px-1  lg:py-10 lg:px-52 ">
         <div>
-          <div className="heading">
-            <p>POPULAR LOCATIONS</p>
+          <div className="py-1">
+            <p className='font-semibold'>POPULAR LOCATIONS</p>
           </div>
           <div className="list">
             <ul>
@@ -20,8 +18,8 @@ function Footer() {
           </div>
         </div>
         <div>
-          <div className="heading">
-            <p>ABOUT US</p>
+          <div className="py-1">
+            <p className='font-semibold'>ABOUT US</p>
           </div>
           <div className="list">
             <ul>
@@ -33,11 +31,11 @@ function Footer() {
           </div>
         </div>
         <div>
-          <div className="heading">
-            <p>OLX</p>
+          <div className="py-1">
+            <p className='font-semibold'>OLX</p>
           </div>
-          <div className="list">
-            <ul>
+          <div className="">
+            <ul className="cursor-pointer">
               <li>Help</li>
               <li>Sitemap</li>
               <li>Legal & Privacy information</li>
@@ -45,9 +43,9 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="footer">
+      <div className="flex font-semibold justify-between px-10 py-4 bg-[#002f34] text-white">
         <p>Other Countries Pakistan - South Africa - Indonesia</p>
-        <p>Free Classifieds in India. © 2006-2021 OLX</p>
+        <p  className=''>Free Classifieds in India. © 2006-2021 OLX</p>
       </div>
     </div>
   );
