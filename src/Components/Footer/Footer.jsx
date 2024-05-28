@@ -2,7 +2,8 @@ import React from 'react';
 
 function Footer() {
   return (
-    <div className="bg-slate-200  ">
+    <>
+    <div className="bg-slate-200 px-10 py-10  ">
       <div className="flex justify-between sm:py-1 sm:px-1  lg:py-10 lg:px-52 ">
         <div>
           <div className="py-1">
@@ -43,11 +44,14 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="flex font-semibold justify-between px-10 py-4 bg-[#002f34] text-white">
-        <p>Other Countries Pakistan - South Africa - Indonesia</p>
-        <p  className=''>Free Classifieds in India. © 2006-2021 OLX</p>
-      </div>
+      
     </div>
+    <div  className="lg:flex font-semibold lg:justify-between lg:px-10 lg:py-4 sm:px-[50px]  bg-[#002f34] text-white sm:flex sm:justify-center sm:py-4">
+    <p>Other Countries Pakistan - South Africa - Indonesia</p>
+    <p  className=''>Free Classifieds in India. © 2006-2021 OLX</p>
+  </div>
+
+  </>
   );
 }
 

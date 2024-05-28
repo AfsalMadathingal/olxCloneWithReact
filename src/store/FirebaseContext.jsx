@@ -121,6 +121,8 @@ export const FirebaseProvider = ({ children }) => {
       
 
       const productsCollection = collection(db, "products");
+      const sellerDetails = collection(db, "user");
+      const sellerSnapshot = await getDocs(sellerDetails);
       const productsSnapshot = await getDocs(productsCollection);
 
       return new Promise((resolve, reject) => {
@@ -128,8 +130,17 @@ export const FirebaseProvider = ({ children }) => {
           const productsList = productsSnapshot.docs.map((doc) => {
             return { id: doc.id, ...doc.data() };
           });
+          const users= sellerSnapshot.docs.map((doc) => {
+            return { id: doc.id, ...doc.data() };
+          })
           const product = productsList.find((product) => product.id === id);
-          resolve(product);
+          console.log("product", product);
+          const seller = users.find((user) => user.uid === product.userId);
+          console.log("seller", seller);
+          resolve({...product,
+            sellerName:seller.name,
+            phone:seller.phone,
+          });
 
     } catch (error) {
       console.log(error);
@@ -142,7 +153,9 @@ export const FirebaseProvider = ({ children }) => {
 
   }
 
-  // const getUser = as
+
+
+
 
   return (
     <FirebaseContext.Provider

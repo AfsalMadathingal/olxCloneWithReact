@@ -42,17 +42,17 @@ function Posts() {
             <div
               onClick={()=>{handleView(product)}}
               key={product.id}
-              className="cursor-pointer bg-white rounded lg:w-2/12  sm:w-3/8 m-8  shadow border-black border hover:shadow-xl h-d flex flex-col"
+              className="cursor-pointer bg-white rounded w-full sm:w-8/12 md:w-6/12 lg:w-4/12 xl:w-3/12 p-4 m-4 shadow border-black border hover:shadow-xl"
             >
               <div className=" p-2 mx-2 my-2 flex justify-end bg-white rounded-3xl absolute z-100">
                 <Heart />
               </div>
-              <div className=" h-28 py-2 px-2">
+              <div className="h-44 py-2 px-2">
                 <img
                   src={product.downloadURL}
                   alt=""
                   
-                  className="w-full h-24 object-cover rounded-lg"
+                  className="w-full h-44 object-cover rounded-lg"
                 />
               </div>
               <div className="content p-3 flex flex-col flex-grow">

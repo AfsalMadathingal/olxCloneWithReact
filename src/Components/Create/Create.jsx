@@ -4,6 +4,8 @@ import Header from "../Header/Header";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import { useFirebase } from "../../store/FirebaseContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 const Create = () => {
   const [image, setImage] = useState("");
@@ -14,12 +16,27 @@ const Create = () => {
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
-
     e.preventDefault()
+    
+    if(image.length === 0){
+      toast.error("Please select an image")
+      return
+    }else if(name.length === 0){
+      toast.error("Please enter a name")
+      return
+    }else if(category.length === 0){
+      toast.error("Please enter a category")
+      return
+    }else if(price === null){
+      toast.error("Please enter a price")
+      return
+    }else if(price < 0){
+      toast.error("Please enter a valid price")
+      return
+    }
     await uploadFile(image,name,category,price)
     navigate("/")
     
-
   };
   return (
     <>

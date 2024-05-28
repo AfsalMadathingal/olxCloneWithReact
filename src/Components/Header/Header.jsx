@@ -7,26 +7,32 @@ import SellButton from "../../assets/SellButton";
 import SellButtonPlus from "../../assets/SellButtonPlus";
 import { useFirebase } from "../../store/FirebaseContext";
 import { useNavigate } from "react-router-dom";
+import ReactLoading from "react-loading";
+import { toast } from "react-toastify";
 
 function Header() {
   const { displayName,setDisplayname, logout } = useFirebase();
   const [name,setName] = useState(displayName)
   const [arrowUp, setArrowUp] = useState(false);
   const [loading,setLoading] = useState(false)
+  const [sideMenu, setSideMenu] = useState(false);
 
+  console.log("name",name);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout().then(() => {
       setName("");
-      setDisplayname("");
+      toast.success("Logout Successfully");
     });
   };
 
 
 
   return (
+
     <>
+    
         <div className="py-2 bg-slate-200">
       <div className="flex justify-between">
         <div
@@ -81,7 +87,7 @@ function Header() {
 
           {name ? (
             <>
-              <p className="align-middle font-semibold">{`Welcome ${displayName}`}</p>
+              <p className="align-middle font-semibold">{`Welcome ${name}`}</p>
               <span
                 className="cursor-pointer text-[#000000] font-bold"
                 onClick={() => {
@@ -99,6 +105,7 @@ function Header() {
                 className="cursor-pointer text-[#002f34] font-bold"
                 onClick={() => {
                   navigate("/login");
+                  setLoading(true);
                 }}
               >
                 <i className="fa-solid fa-right-to-bracket"></i> Login
@@ -106,17 +113,26 @@ function Header() {
             </>
           )}
           <hr />
-          <div onClick={() => navigate("/create")} className="sellMenu">
+          {name && (
+            <div onClick={() => navigate("/create")} className="sellMenu">
             <SellButton></SellButton>
             <div className="sellMenuContent">
               <SellButtonPlus></SellButtonPlus>
               <span>SELL</span>
             </div>
           </div>
+          )}
+          
         </div>
-        <div className="lg:hidden font-bold h-5 w-24 pt-6 cursor-pointer flex justify-center items-center">
+        <div onClick={() => setSideMenu(!sideMenu)} className="lg:hidden font-bold h-5 w-24 pt-6 cursor-pointer flex justify-center items-center">
           <i className="fa-solid fa-bars  lg:hidden text-[40px] text-black"></i>
         </div>
+          {sideMenu && <div className="bg-slate-200 w-[300px] h-[200px] absolute right-2 top-16 flex-row  justify-center shadow-lg border border-[#002f34] z-10">
+         {name? <p className="py-2 px-10 text-[#002f34] text-[20px] font-bold">{`Welcome ${name}`}</p> : <p onClick={() => navigate("/login")} className="py-2 px-10  text-[#002f34] text-[25px] font-bold cursor-pointer"> <i className="fa-solid fa-right-to-bracket"></i> Login</p> }
+         {name && <p onClick={() => handleLogout()} className="py-2 px-10 cursor-pointer text-[20px] text-[#002f34] font-bold"><i className="fa-solid fa-right-to-bracket"></i> Logout</p>}
+         {name && <p onClick={() => navigate("/create")} className= "py-2 px-10 text-[20px] cursor-pointer text-[#002f34] font-bold"> <i className="fa-solid fa-sack-dollar"></i> Sell</p>}
+        </div>}
+        
       </div>
     </div>
     </>
