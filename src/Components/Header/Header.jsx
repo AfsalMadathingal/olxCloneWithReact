@@ -1,5 +1,4 @@
 import React from "react";
-
 import "./Header.css";
 import OlxLogo from "../../assets/OlxLogo";
 import Search from "../../assets/Search";
@@ -8,20 +7,26 @@ import SellButton from "../../assets/SellButton";
 import SellButtonPlus from "../../assets/SellButtonPlus";
 import { useFirebase } from "../../store/FirebaseContext";
 import { useNavigate } from "react-router-dom";
+
 function Header() {
+
   const { displayName, logout } = useFirebase();
 
   const navigate = useNavigate();
 
+  console.log("display",displayName);
+
   const handleLogout = () => {
-    logout();
-    navigate("/");
+    logout().then(()=>{
+      navigate("/");
+    })
+    
   };
 
   return (
-    <div className="py-2 bg-slate-100">
+    <div className="py-2 bg-slate-200">
       <div className="headerChildDiv">
-        <div className=" mx-5 brandName">
+        <div onClick={() => navigate("/")} className=" mx-5 brandName cursor-pointer">
           <OlxLogo></OlxLogo>
         </div>
         <div className="place-and-search flex items-center gap-2">
@@ -49,7 +54,7 @@ function Header() {
           <Arrow></Arrow>
         </div>
         
-          {displayName ? (
+          { displayName ? (
             <p className="align-middle">{`Welcome ${displayName}`}</p>
           ) : (
             <p
@@ -65,16 +70,16 @@ function Header() {
         {displayName && (
           <span
             onClick={() => {
-              navigate("/signup");
+              handleLogout();
             }}
           >
             {" "}
             Logout{" "}
           </span>
         )}
-        <div className="sellMenu">
+        <div onClick={() => navigate("/create")} className="sellMenu">
           <SellButton></SellButton>
-          <div className="sellMenuContent">
+          <div  className="sellMenuContent">
             <SellButtonPlus></SellButtonPlus>
             <span>SELL</span>
           </div>

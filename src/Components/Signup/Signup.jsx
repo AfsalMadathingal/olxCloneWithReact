@@ -17,6 +17,12 @@ export default function Signup() {
   function handleSubmit (e){
 
     e.preventDefault()
+
+    if(!userName || !email || !phone || !password){
+      alert("Please enter all the fields")
+    }
+
+
     signup(userName,email,password,phone).then(()=>{
       navigate('/login')
     })

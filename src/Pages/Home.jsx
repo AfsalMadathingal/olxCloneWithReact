@@ -8,17 +8,6 @@ import { useFirebase } from '../store/FirebaseContext';
 
 function Home(props) {
 
-const {setDisplayName , auth } = useFirebase()
-
-  useEffect(()=>{
-
-    onAuthStateChanged(auth,async (user)=>{
-      setDisplayName(user.displayName)
-    })
-
-
-  },[])
-
   return (
     <div className="homeParentDiv">
       <Header />

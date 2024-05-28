@@ -3,8 +3,8 @@ import React from 'react'
 export default function Heart() {
     return(
         <svg
-        width="24px"
-        height="24px"
+        width="20px"
+        height="20px"
         viewBox="0 0 1024 1024"
         data-aut-id="icon"
     
