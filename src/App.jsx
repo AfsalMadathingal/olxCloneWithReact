@@ -30,7 +30,10 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setDisplayName(user?.displayName ? user.displayName : "");
-      if (user && (location.pathname === "/login" || location.pathname === "/signup")) {
+      if (
+        user &&
+        (location.pathname === "/login" || location.pathname === "/signup")
+      ) {
         navigate("/");
       }
       setLoading(false);
@@ -42,7 +45,6 @@ function App() {
   if (loading) {
     return (
       <div className="w-screen h-screen flex justify-center items-center">
-       
         <ReactLoading type="bars" color="#002f34" height={50} width={50} />
       </div>
     );
