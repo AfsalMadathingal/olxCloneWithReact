@@ -8,9 +8,9 @@ import {
   useLocation,
 } from "react-router-dom";
 import "./App.css";
-import Home from "../../olx/src/Pages/Home";
-import Signup from "../../olx/src/Pages/Signup";
-import Login from "../../olx/src/Pages/Login";
+import Home from "./Pages/Home";
+import Signup from "./Pages/Signup";
+import Login from "./Pages/Login";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { onAuthStateChanged } from "firebase/auth";
@@ -28,6 +28,7 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
+    
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
       setDisplayName(user?.displayName ? user.displayName : "");
       if (
@@ -40,6 +41,7 @@ function App() {
     });
 
     return () => unsubscribe();
+
   }, [auth, navigate, setDisplayName, location.pathname]);
 
   if (loading) {
